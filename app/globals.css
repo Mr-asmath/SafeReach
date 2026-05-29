@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body { font-family: 'Inter', sans-serif; }
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+.auth-bg {
+  background-color: #f8f9fb;
+  background-image: radial-gradient(#dce1ff 0.5px, transparent 0.5px), radial-gradient(#dce1ff 0.5px, #f8f9fb 0.5px);
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px;
+}
+.role-card.active { border-color: #00236f; background-color: #dce1ff; }
+.login-card-shadow { box-shadow: 0px 4px 12px rgba(0,0,0,0.12); }
+.step-transition { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+.hidden-step { opacity: 0; transform: translateX(20px); pointer-events: none; position: absolute; }
+.status-chip { padding: 4px 12px; border-radius: 9999px; font-size: 12px; font-weight: 600; }
+.glass-card { background: rgba(255,255,255,0.9); backdrop-filter: blur(8px); border: 1px solid rgba(229,231,235,0.5); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+.bento-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; }
+.custom-scrollbar::-webkit-scrollbar { width: 4px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: #e5e7eb; border-radius: 10px; }
+.student-table-container { scrollbar-width: thin; scrollbar-color: #c5c5d3 transparent; }
