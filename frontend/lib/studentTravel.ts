@@ -12,6 +12,16 @@ export type StudentTravelStatus =
   | 'reached_home';
 
 export type AttendanceMark = 'pending' | 'present' | 'absent' | 'late';
+export type TeacherSmsStatus = 'present' | 'absent' | 'late' | 'reached_school' | 'going_home' | 'reached_home';
+
+export type StudentSmsLog = {
+  id: string;
+  status: TeacherSmsStatus;
+  message: string;
+  phone: string;
+  sentAt: string;
+  sentBy: string;
+};
 
 export type StudentTravelRecord = {
   id: string;
@@ -30,6 +40,7 @@ export type StudentTravelRecord = {
   absenceReason: string;
   absenceReasonRequested: boolean;
   absenceSmsSentAt: string;
+  smsHistory: StudentSmsLog[];
   updatedAt: string;
 };
 
@@ -56,6 +67,7 @@ export const seedTravelRecords: StudentTravelRecord[] = [
     absenceReason: '',
     absenceReasonRequested: false,
     absenceSmsSentAt: '',
+    smsHistory: [],
     updatedAt: 'Demo start',
   },
   {
@@ -75,6 +87,7 @@ export const seedTravelRecords: StudentTravelRecord[] = [
     absenceReason: '',
     absenceReasonRequested: false,
     absenceSmsSentAt: '',
+    smsHistory: [],
     updatedAt: 'Demo start',
   },
   {
@@ -94,6 +107,7 @@ export const seedTravelRecords: StudentTravelRecord[] = [
     absenceReason: '',
     absenceReasonRequested: false,
     absenceSmsSentAt: '',
+    smsHistory: [],
     updatedAt: 'Demo start',
   },
   {
@@ -113,6 +127,7 @@ export const seedTravelRecords: StudentTravelRecord[] = [
     absenceReason: '',
     absenceReasonRequested: false,
     absenceSmsSentAt: '',
+    smsHistory: [],
     updatedAt: 'Demo start',
   },
   {
@@ -132,6 +147,7 @@ export const seedTravelRecords: StudentTravelRecord[] = [
     absenceReason: '',
     absenceReasonRequested: false,
     absenceSmsSentAt: '',
+    smsHistory: [],
     updatedAt: 'Demo start',
   },
   {
@@ -151,6 +167,7 @@ export const seedTravelRecords: StudentTravelRecord[] = [
     absenceReason: '',
     absenceReasonRequested: false,
     absenceSmsSentAt: '',
+    smsHistory: [],
     updatedAt: 'Demo start',
   },
 ];
@@ -184,6 +201,58 @@ function updateRecords(updater: (records: StudentTravelRecord[]) => StudentTrave
 function updateOne(studentId: string, patch: Partial<StudentTravelRecord>) {
   return updateRecords(records =>
     records.map(record => record.id === studentId ? { ...record, ...patch, updatedAt: nowLabel() } : record)
+  );
+}
+
+function smsStatusLabel(status: TeacherSmsStatus) {
+  const labels: Record<TeacherSmsStatus, string> = {
+    present: 'Present',
+    absent: 'Absent',
+    late: 'Late',
+    reached_school: 'Reached School',
+    going_home: 'Go Out / Going Home',
+    reached_home: 'Reached Home',
+  };
+  return labels[status];
+}
+
+function buildSmsMessage(student: StudentTravelRecord, status: TeacherSmsStatus) {
+  const base = `SafeReach: ${student.name} (${student.className}-${student.section})`;
+  const messages: Record<TeacherSmsStatus, string> = {
+    present: `${base} is marked Present and reached school safely. - ${student.teacherName}`,
+    absent: `${base} is marked Absent today. Please send the absence reason to school. - ${student.teacherName}`,
+    late: `${base} reached school Late. Attendance has been updated. - ${student.teacherName}`,
+    reached_school: `${base} has Reached School. Attendance confirmation will follow. - ${student.teacherName}`,
+    going_home: `${base} has left school and is Going Home. Please confirm when reached home. - ${student.teacherName}`,
+    reached_home: `${base} is recorded as Reached Home. Thank you. - ${student.teacherName}`,
+  };
+  return messages[status];
+}
+
+function createSmsLog(student: StudentTravelRecord, status: TeacherSmsStatus): StudentSmsLog {
+  const sentAt = nowLabel();
+  return {
+    id: `${student.id}-${status}-${Date.now()}`,
+    status,
+    message: buildSmsMessage(student, status),
+    phone: student.parentPhone,
+    sentAt,
+    sentBy: student.teacherName,
+  };
+}
+
+function updateOneWithSms(studentId: string, status: TeacherSmsStatus, patch: Partial<StudentTravelRecord>) {
+  return updateRecords(records =>
+    records.map(record => {
+      if (record.id !== studentId) return record;
+      const sms = createSmsLog(record, status);
+      return {
+        ...record,
+        ...patch,
+        smsHistory: [sms, ...(record.smsHistory ?? [])].slice(0, 20),
+        updatedAt: sms.sentAt,
+      };
+    })
   );
 }
 
@@ -253,7 +322,7 @@ export function useStudentTravelState() {
       }));
     },
     markPresent(studentId: string) {
-      setRecords(updateOne(studentId, {
+      setRecords(updateOneWithSms(studentId, 'present', {
         status: 'present',
         attendance: 'present',
         location: 'Reached school campus',
@@ -261,15 +330,23 @@ export function useStudentTravelState() {
       }));
     },
     markLate(studentId: string) {
-      setRecords(updateOne(studentId, {
+      setRecords(updateOneWithSms(studentId, 'late', {
         status: 'present',
         attendance: 'late',
         location: 'Reached school campus late',
         absenceReasonRequested: false,
       }));
     },
+    markReachedSchool(studentId: string) {
+      setRecords(updateOneWithSms(studentId, 'reached_school', {
+        status: 'reached_school',
+        attendance: 'pending',
+        location: 'Reached school campus',
+        absenceReasonRequested: false,
+      }));
+    },
     markAbsent(studentId: string) {
-      setRecords(updateOne(studentId, {
+      setRecords(updateOneWithSms(studentId, 'absent', {
         status: 'absent',
         attendance: 'absent',
         location: 'Not reached school',
@@ -285,17 +362,27 @@ export function useStudentTravelState() {
     },
     markLeavingSchool(studentIds: string[]) {
       setRecords(updateRecords(records =>
-        records.map(record => studentIds.includes(record.id)
-          ? { ...record, status: 'going_home', location: 'Left school and going home', updatedAt: nowLabel() }
-          : record
-        )
+        records.map(record => {
+          if (!studentIds.includes(record.id)) return record;
+          const sms = createSmsLog(record, 'going_home');
+          return {
+            ...record,
+            status: 'going_home',
+            location: 'Left school and going home',
+            smsHistory: [sms, ...(record.smsHistory ?? [])].slice(0, 20),
+            updatedAt: sms.sentAt,
+          };
+        })
       ));
     },
     markReachedHome(studentId: string) {
-      setRecords(updateOne(studentId, {
+      setRecords(updateOneWithSms(studentId, 'reached_home', {
         status: 'reached_home',
         location: 'Reached home',
       }));
+    },
+    sendStatusSms(studentId: string, status: TeacherSmsStatus) {
+      setRecords(updateOneWithSms(studentId, status, {}));
     },
     resetDemo() {
       writeTravelRecords(seedTravelRecords);
@@ -314,6 +401,9 @@ export function useStudentTravelState() {
       goingHome: records.filter(record => record.status === 'going_home').length,
       reachedHome: records.filter(record => record.status === 'reached_home').length,
     },
+    smsLogs: records.flatMap(record => (record.smsHistory ?? []).map(log => ({ ...log, studentName: record.name, parentName: record.parentName })))
+      .sort((a, b) => b.id.localeCompare(a.id)),
+    smsStatusLabel,
     actions,
   };
 }

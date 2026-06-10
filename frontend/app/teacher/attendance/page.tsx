@@ -3,35 +3,44 @@
 import { useState } from 'react';
 import { travelStatusClass, travelStatusIcon, travelStatusLabel, useStudentTravelState } from '@/lib/studentTravel';
 
-type AttendanceStatus = 'present' | 'absent' | 'late';
+type AttendanceStatus = 'present' | 'absent' | 'late' | 'reached_school';
 
 const btnCls = (cur: AttendanceStatus, tgt: AttendanceStatus) => {
   const base = 'px-3 py-1 rounded-lg text-label-sm font-bold transition-all border ';
   if (cur === tgt) {
     if (tgt === 'present') return base + 'bg-green-500 text-white border-green-500';
     if (tgt === 'absent') return base + 'bg-error text-white border-error';
+    if (tgt === 'reached_school') return base + 'bg-blue-500 text-white border-blue-500';
     return base + 'bg-yellow-400 text-white border-yellow-400';
   }
   return base + 'bg-surface-container text-on-surface-variant border-outline-variant hover:bg-surface-container-high';
 };
 
 export default function TeacherAttendancePage() {
-  const { classStudents, counts, actions } = useStudentTravelState();
+  const { classStudents, counts, smsLogs, actions } = useStudentTravelState();
   const [saved, setSaved] = useState(false);
   const [leaveIds, setLeaveIds] = useState<string[]>([]);
   const [leaveSaved, setLeaveSaved] = useState(false);
+  const [lastSmsNotice, setLastSmsNotice] = useState('SMS will be sent automatically for teacher status updates.');
 
   function currentAttendance(studentId: string): AttendanceStatus {
     const student = classStudents.find(item => item.id === studentId);
     if (student?.attendance === 'absent') return 'absent';
     if (student?.attendance === 'late') return 'late';
+    if (student?.status === 'reached_school') return 'reached_school';
     return 'present';
   }
 
   function mark(studentId: string, status: AttendanceStatus) {
+    const student = classStudents.find(item => item.id === studentId);
     if (status === 'present') actions.markPresent(studentId);
     if (status === 'absent') actions.markAbsent(studentId);
     if (status === 'late') actions.markLate(studentId);
+    if (status === 'reached_school') actions.markReachedSchool(studentId);
+    if (student) {
+      const label = status === 'reached_school' ? 'Reached School' : status.charAt(0).toUpperCase() + status.slice(1);
+      setLastSmsNotice(`SMS sent to ${student.parentName} (${student.parentPhone}): ${student.name} - ${label}.`);
+    }
     setSaved(false);
   }
 
@@ -46,7 +55,9 @@ export default function TeacherAttendancePage() {
   }
 
   function submitLeave() {
+    const selectedStudents = classStudents.filter(student => leaveIds.includes(student.id));
     actions.markLeavingSchool(leaveIds);
+    setLastSmsNotice(`${selectedStudents.length} go-out SMS ${selectedStudents.length === 1 ? 'was' : 'were'} sent to parent phones.`);
     setLeaveIds([]);
     setLeaveSaved(true);
   }
@@ -80,13 +91,24 @@ export default function TeacherAttendancePage() {
         <button onClick={() => markAll('late')} className="px-4 py-1.5 rounded-lg text-label-md bg-yellow-400 text-white hover:bg-yellow-500">Late</button>
       </div>
 
+      <section className="bg-blue-50 border border-blue-100 rounded-xl p-4 mb-stack-lg flex flex-col md:flex-row md:items-center gap-3">
+        <div className="w-10 h-10 rounded-full bg-blue-500 text-white flex items-center justify-center shrink-0">
+          <span className="material-symbols-outlined">sms</span>
+        </div>
+        <div className="flex-1">
+          <h2 className="font-headline-sm text-title-md text-blue-900">Parent SMS Enabled</h2>
+          <p className="text-label-md text-blue-800">{lastSmsNotice}</p>
+        </div>
+        <span className="px-3 py-1 rounded-full bg-white text-blue-700 text-label-sm font-bold border border-blue-200">Frontend demo only</span>
+      </section>
+
       <section className="bg-white rounded-xl shadow-sm border border-outline-variant/30 overflow-hidden mb-stack-lg">
         <div className="p-stack-md border-b border-outline-variant/30">
           <h2 className="font-headline-md text-headline-md text-primary">Morning Attendance and Travel Status</h2>
-          <p className="text-label-md text-on-surface-variant">Present updates parent status to Reached School. Absent sends the parent SMS/reason request in Messages.</p>
+          <p className="text-label-md text-on-surface-variant">Present, Absent, Late, Reached School, and Go Out actions create parent SMS previews for families without smartphones.</p>
         </div>
         <div className="overflow-x-auto">
-          <table className="w-full min-w-[980px] text-left">
+          <table className="w-full min-w-[1120px] text-left">
             <thead className="bg-surface-container-low text-label-md text-on-surface-variant">
               <tr>{['Roll', 'Student', 'Travel Status', 'Parent SMS / Reason', 'Attendance'].map(head => <th key={head} className="px-4 py-3 font-bold">{head}</th>)}</tr>
             </thead>
@@ -111,23 +133,55 @@ export default function TeacherAttendancePage() {
                     <p className="text-xs text-on-surface-variant mt-1">{student.location}</p>
                   </td>
                   <td className="px-4 py-3 text-label-md">
-                    {student.absenceReason ? (
-                      <span className="text-green-700 font-bold">Reason: {student.absenceReason}</span>
-                    ) : student.absenceReasonRequested ? (
-                      <span className="text-error font-bold">SMS sent {student.absenceSmsSentAt || 'today'}; reason pending.</span>
+                    {student.smsHistory?.[0] ? (
+                      <div>
+                        <p className="font-bold text-blue-700">SMS sent {student.smsHistory[0].sentAt}</p>
+                        <p className="text-xs text-on-surface-variant max-w-xs truncate">{student.smsHistory[0].message}</p>
+                        {student.absenceReason && <p className="text-xs text-green-700 font-bold mt-1">Reason: {student.absenceReason}</p>}
+                        {student.absenceReasonRequested && !student.absenceReason && <p className="text-xs text-error font-bold mt-1">Absence reason pending.</p>}
+                      </div>
                     ) : (
-                      <span className="text-on-surface-variant">No absence request</span>
+                      <span className="text-on-surface-variant">No SMS sent yet</span>
                     )}
                   </td>
                   <td className="px-4 py-3">
-                    <div className="flex gap-1.5">
-                      <button onClick={() => mark(student.id, 'present')} className={btnCls(currentAttendance(student.id), 'present')}>P</button>
-                      <button onClick={() => mark(student.id, 'absent')} className={btnCls(currentAttendance(student.id), 'absent')}>A</button>
-                      <button onClick={() => mark(student.id, 'late')} className={btnCls(currentAttendance(student.id), 'late')}>L</button>
+                    <div className="flex flex-wrap gap-1.5">
+                      <button title="Mark present and send parent SMS" onClick={() => mark(student.id, 'present')} className={btnCls(currentAttendance(student.id), 'present')}>P</button>
+                      <button title="Mark absent and send parent SMS" onClick={() => mark(student.id, 'absent')} className={btnCls(currentAttendance(student.id), 'absent')}>A</button>
+                      <button title="Mark late and send parent SMS" onClick={() => mark(student.id, 'late')} className={btnCls(currentAttendance(student.id), 'late')}>L</button>
+                      <button title="Mark reached school and send parent SMS" onClick={() => mark(student.id, 'reached_school')} className={btnCls(currentAttendance(student.id), 'reached_school')}>R</button>
                     </div>
                   </td>
                 </tr>
               ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section className="bg-white rounded-xl shadow-sm border border-outline-variant/30 overflow-hidden mb-stack-lg">
+        <div className="p-stack-md border-b border-outline-variant/30">
+          <h2 className="font-headline-md text-headline-md text-primary">Recent Parent SMS Log</h2>
+          <p className="text-label-md text-on-surface-variant">Frontend-only SMS records generated by teacher status updates.</p>
+        </div>
+        <div className="overflow-x-auto">
+          <table className="w-full min-w-[760px] text-left">
+            <thead className="bg-surface-container-low text-label-md text-on-surface-variant">
+              <tr>{['Time', 'Student', 'Parent', 'Phone', 'SMS Message'].map(head => <th key={head} className="px-4 py-3 font-bold">{head}</th>)}</tr>
+            </thead>
+            <tbody className="divide-y divide-outline-variant/30">
+              {smsLogs.slice(0, 8).map(log => (
+                <tr key={log.id}>
+                  <td className="px-4 py-3 text-label-sm text-on-surface-variant">{log.sentAt}</td>
+                  <td className="px-4 py-3 font-bold text-on-surface">{log.studentName}</td>
+                  <td className="px-4 py-3 text-label-md">{log.parentName}</td>
+                  <td className="px-4 py-3 text-label-md">{log.phone}</td>
+                  <td className="px-4 py-3 text-label-md">{log.message}</td>
+                </tr>
+              ))}
+              {smsLogs.length === 0 && (
+                <tr><td colSpan={5} className="px-4 py-6 text-center text-on-surface-variant">No SMS records yet. Mark a student status to create the first parent SMS.</td></tr>
+              )}
             </tbody>
           </table>
         </div>
