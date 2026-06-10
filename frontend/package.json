@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "node scripts/run-next.cjs dev",
     "build": "node scripts/run-next.cjs build",
+    "build:pages": "node scripts/build-pages.cjs",
     "start": "node scripts/run-next.cjs start",
     "lint": "node scripts/run-next.cjs lint"
   },
