@@ -1,35 +1,29 @@
 <div align="center">
 
-  <img src="https://readme-typing-svg.demolab.com?font=Inter&weight=800&size=34&duration=2600&pause=800&color=00236F&center=true&vCenter=true&width=820&lines=SafeReach;Smart+Student+Safety+Tracker;School+Safety+%2B+Role+Dashboards;Frontend+Prototype+for+Real-World+Planning" alt="SafeReach animated title" />
+  <img src="https://readme-typing-svg.demolab.com?font=Inter&weight=800&size=34&duration=2600&pause=700&color=0F62FE&center=true&vCenter=true&width=850&lines=SafeReach;Smart+Student+Safety+Dashboard;Role-Based+School+Safety+Frontend;Built+with+Next.js+and+Tailwind+CSS" alt="SafeReach animated title" />
 
   <p>
-    <strong>SafeReach</strong> is a colorful Next.js frontend prototype for school safety, student monitoring, school administration, parent visibility, teacher workflows, and app-level main-admin control.
+    <strong>SafeReach</strong> is a responsive school safety frontend for main admins, school admins, teachers, and parents.
+    It focuses on calm monitoring screens, quick role navigation, emergency visibility, and polished motion.
   </p>
 
   <p>
-    <img alt="Next.js" src="https://img.shields.io/badge/Next.js-15.5-111111?style=for-the-badge&logo=nextdotjs&logoColor=white" />
+    <img alt="Next.js" src="https://img.shields.io/badge/Next.js-15-111111?style=for-the-badge&logo=nextdotjs&logoColor=white" />
     <img alt="React" src="https://img.shields.io/badge/React-19-149ECA?style=for-the-badge&logo=react&logoColor=white" />
     <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript&logoColor=white" />
-    <img alt="Tailwind CSS" src="https://img.shields.io/badge/Tailwind-CSS-38BDF8?style=for-the-badge&logo=tailwindcss&logoColor=white" />
-  </p>
-
-  <p>
-    <img alt="Frontend only" src="https://img.shields.io/badge/Scope-Frontend%20Only-006B5F?style=flat-square" />
-    <img alt="No backend" src="https://img.shields.io/badge/Backend-Not%20Created-BA1A1A?style=flat-square" />
-    <img alt="Demo auth" src="https://img.shields.io/badge/Auth-Demo%20Only-F59E0B?style=flat-square" />
-    <img alt="Responsive" src="https://img.shields.io/badge/UI-Responsive-7C3AED?style=flat-square" />
+    <img alt="Tailwind" src="https://img.shields.io/badge/Tailwind-CSS-38BDF8?style=for-the-badge&logo=tailwindcss&logoColor=white" />
   </p>
 
   <p>
     <a href="#quick-start">Quick Start</a>
     <span> | </span>
-    <a href="#demo-login-credentials">Demo Logins</a>
+    <a href="#visual-style">Visual Style</a>
+    <span> | </span>
+    <a href="#animations">Animations</a>
     <span> | </span>
     <a href="#route-map">Routes</a>
     <span> | </span>
-    <a href="#feature-highlights">Features</a>
-    <span> | </span>
-    <a href="#project-structure">Structure</a>
+    <a href="#console-notes">Console Notes</a>
   </p>
 
 </div>
@@ -38,333 +32,219 @@
 
 ## Overview
 
-SafeReach is currently a **frontend-only demo application**. It is built for planning and validating screens before a future backend is added.
+SafeReach is currently a frontend application. It is designed as a high-fidelity prototype for school safety workflows before API, database, and production authentication services are connected.
 
-<table>
-  <tr>
-    <td><strong>App Name</strong></td>
-    <td>SafeReach</td>
-  </tr>
-  <tr>
-    <td><strong>Frontend Framework</strong></td>
-    <td>Next.js App Router</td>
-  </tr>
-  <tr>
-    <td><strong>User Roles</strong></td>
-    <td>Main Admin, School Admin, Teacher, Parent</td>
-  </tr>
-  <tr>
-    <td><strong>Backend Status</strong></td>
-    <td>No backend, database, API, Docker backend, or backend connection has been created.</td>
-  </tr>
-  <tr>
-    <td><strong>Data Status</strong></td>
-    <td>Demo/static/local frontend state only.</td>
-  </tr>
-</table>
-
----
+| Area | Details |
+| --- | --- |
+| Framework | Next.js App Router |
+| UI | React, TypeScript, Tailwind CSS |
+| Roles | Main Admin, School Admin, Teacher, Parent |
+| Data | Demo/static frontend state |
+| Backend | Not connected in this frontend folder |
+| Goal | Validate screens, layout, style, animation, and role journeys |
 
 ## Quick Start
 
-> Run all frontend pages, including the normal portals and the separate main-admin area, from the same `frontend` folder.
-
 ```powershell
-cd frontend
+cd E:\Projects\Live\SafeReach\frontend
 npm install
 npm run dev
 ```
 
-Open:
+Open the app:
 
 ```text
 http://localhost:3000
 ```
 
-Production flow:
+Build for production:
 
 ```powershell
 npm run build
-npm start
+npm run start
 ```
 
----
+## Scripts
 
-## Demo Login Credentials
+| Command | Purpose |
+| --- | --- |
+| `npm run dev` | Start the local Next.js development server |
+| `npm run build` | Create the production build |
+| `npm run start` | Run the production server after build |
+| `npm run lint` | Run Next.js linting |
+| `npm run build:pages` | Build page output through the project helper script |
 
-### Main Admin
+## Visual Style
 
-> Main Admin is intentionally separate from the normal role-selection page.
+SafeReach uses a clean safety-technology visual style:
 
-| Field | Value |
-|---|---|
-| URL | `/main-admin/login` |
-| Email | `mainadmin@safereach.app` |
-| Password | `MainAdmin@2025` |
-| OTP Code | `123456` |
+- Trust colors: deep blue, bright cyan, fresh green, and alert amber.
+- Backgrounds: soft gradients, bright panels, and high-contrast dashboard areas.
+- Cards: rounded, layered, readable, and grouped by workflow.
+- Typography: bold section titles, short labels, and scan-friendly data text.
+- Layout: mobile-first grids that become dense dashboards on desktop.
+- Status colors: green for safe, amber for attention, red for urgent, blue for information.
 
-### School Admin
+Recommended Tailwind color roles:
 
-| Field | Value |
-|---|---|
-| URL | `/login/admin` |
-| Email | `admin@demo.safereach.edu` |
-| Password | `Admin@2025` |
-| OTP Code | `000000` |
+```text
+Primary:   blue / indigo
+Safe:      emerald / green
+Alert:     amber / orange
+Danger:    red / rose
+Surface:   white / slate-50
+Text:      slate-900 / slate-600
+```
 
-### Teacher
+## Animations
 
-| Field | Value |
-|---|---|
-| URL | `/login/teacher` |
-| Email | `teacher@demo.safereach.edu` |
-| Password | `Teacher@2025` |
+The interface should feel responsive without becoming distracting:
 
-### Parent
+- Hero entrance: smooth fade and upward slide.
+- Dashboard cards: slight lift and shadow on hover.
+- Buttons: scale, color, and shadow transitions.
+- Navigation: active route highlight with soft movement.
+- Alerts: pulse only for urgent or live-status elements.
+- Tables and lists: staggered fade-in for first load.
+- Modals or panels: quick scale/fade transition.
 
-| Field | Value |
-|---|---|
-| URL | `/login/parent` |
-| Email | `parent@demo.safereach.edu` |
-| Password | `Parent@2025` |
+Example motion language:
 
----
+```css
+.safe-card {
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
 
-## Feature Highlights
+.safe-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.14);
+}
 
-<table>
-  <tr>
-    <th>Area</th>
-    <th>Highlights</th>
-  </tr>
-  <tr>
-    <td><strong>Main Admin</strong></td>
-    <td>Separate owner login, school request approval, SMS preview, school monitoring, staff view, class-section-student drilldown, permission toggles, and app-wide reports.</td>
-  </tr>
-  <tr>
-    <td><strong>School Admin</strong></td>
-    <td>Dashboard, student grouping by class and section, student promotion to next standard, teacher creation, class-section incharge assignment, incidents, reports, account actions, support, and profile pages.</td>
-  </tr>
-  <tr>
-    <td><strong>Teacher</strong></td>
-    <td>Assigned-class student add/edit/remove, attendance, reports, safety protocols, messages, support, settings, and profile pages.</td>
-  </tr>
-  <tr>
-    <td><strong>Parent</strong></td>
-    <td>Child dashboard, attendance range/month filters, marks report filters, messages, child records, safety protocols, support, settings, and profile pages.</td>
-  </tr>
-  <tr>
-    <td><strong>Responsive UI</strong></td>
-    <td>Fixed top headers, mobile menu buttons, horizontal table scrolling, and frontend-only download/export actions.</td>
-  </tr>
-</table>
+.live-alert {
+  animation: safePulse 1.5s ease-in-out infinite;
+}
 
----
+@keyframes safePulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.72;
+    transform: scale(1.03);
+  }
+}
+```
+
+Use `prefers-reduced-motion` for accessibility:
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+```
 
 ## Route Map
 
-### Public and Auth
+Common routes in the frontend:
 
-| Route | Description |
-|---|---|
-| `/` | Normal role selection for School Admin, Teacher, and Parent |
-| `/login/admin` | School admin login with OTP |
-| `/login/teacher` | Teacher login |
-| `/login/parent` | Parent login |
-| `/login/forgot-password` | Forgot password flow |
-| `/school-registration` | School admin request form for creating a school environment |
-| `/main-admin/login` | Separate app-owner main admin login |
+| Route | Screen |
+| --- | --- |
+| `/` | Landing / entry page |
+| `/login` | Login screen |
+| `/admin` | School admin dashboard |
+| `/teacher` | Teacher dashboard |
+| `/parent` | Parent dashboard |
+| `/main-admin` | Platform-level main admin dashboard |
+| `/school-registration` | School registration flow |
 
-### Main Admin Portal
+The exact route list can be checked in the `app/` directory.
 
-| Route | Description |
-|---|---|
-| `/main-admin/dashboard` | App-level control center for school requests, schools, users, permissions, classes, sections, and students |
-| `/main-admin/reports` | App-wide monitoring reports, school health, role audit, and CSV export |
+## Role Experience
 
-### School Admin Portal
+Main Admin:
 
-| Route | Description |
-|---|---|
-| `/admin/dashboard` | System overview and safety report drilldown |
-| `/admin/students` | Class and section based student records |
-| `/admin/students/add` | Student enrollment form |
-| `/admin/students/profile` | Student profile and safety details |
-| `/admin/teachers` | Teacher management and class-section incharge assignment |
-| `/admin/teachers/profile` | Teacher profile |
-| `/admin/incidents` | Incident log with priority order and accept/reject actions |
-| `/admin/reports` | Safety reports and exports |
-| `/admin/account` | Admin account action hub |
-| `/admin/access` | User access settings |
-| `/admin/security` | Security settings |
-| `/admin/audit` | System audit |
-| `/admin/preferences` | System preferences |
-| `/admin/profile` | Admin profile |
-| `/admin/support` | Support page |
+- View platform-level school activity.
+- Monitor school onboarding and safety status.
+- Manage high-level application controls.
 
-### Teacher Portal
+School Admin:
 
-| Route | Description |
-|---|---|
-| `/teacher/dashboard` | Class dashboard and safety protocol area |
-| `/teacher/students` | Assigned-class student add/edit/remove |
-| `/teacher/attendance` | Attendance management |
-| `/teacher/messages` | Parent and staff messages |
-| `/teacher/reports` | Incident and class reports |
-| `/teacher/settings` | Teacher settings |
-| `/teacher/profile` | Teacher profile |
-| `/teacher/support` | Support page |
+- Track students, teachers, attendance, and incidents.
+- Review dashboard summaries.
+- Coordinate safety workflows.
 
-### Parent Portal
+Teacher:
 
-| Route | Description |
-|---|---|
-| `/parent/dashboard` | Child safety dashboard |
-| `/parent/students` | My children |
-| `/parent/children/records` | Child records quick-access page |
-| `/parent/attendance` | Attendance history with date/month/year filters |
-| `/parent/messages` | Messages |
-| `/parent/reports` | Marks and subject performance report filters |
-| `/parent/settings` | Parent settings |
-| `/parent/profile` | Parent profile |
-| `/parent/support` | Support page |
+- View assigned students and class details.
+- Monitor safety-relevant updates.
+- Support school-level daily operations.
 
----
+Parent:
 
-## Main Admin Workflow
-
-```mermaid
-flowchart LR
-    A[School Admin Registration] --> B[Main Admin Reviews Request]
-    B --> C{Accept or Reject}
-    C -->|Accept| D[SMS Preview with Email and Password]
-    C -->|Reject| E[Rejection SMS Preview]
-    D --> F[School Appears in Main Admin Monitoring]
-    F --> G[Inspect Staff, Classes, Sections, Students]
-    G --> H[Control Role Permission Keys]
-```
-
-> If your Markdown viewer does not support Mermaid, the same workflow is still represented by the route and feature tables above.
-
----
-
-## Permission Key Examples
-
-| Permission Key | Role | Meaning |
-|---|---|---|
-| `app.main.school.accept` | Main Admin | Approve a school environment request |
-| `app.main.school.reject` | Main Admin | Reject a school environment request |
-| `app.main.user.monitor` | Main Admin | Monitor all schools, roles, and users |
-| `app.admin.student.add` | School Admin | Add student records |
-| `app.admin.student.edit` | School Admin | Edit student records |
-| `app.admin.student.delete` | School Admin | Delete student records when enabled |
-| `app.admin.class.assign` | School Admin | Assign class-section incharge teacher |
-| `app.teacher.student.add` | Teacher | Add students in assigned class |
-| `app.teacher.student.edit` | Teacher | Edit students in assigned class |
-| `app.teacher.student.delete` | Teacher | Remove students in assigned class when enabled |
-
----
-
-## Tech Stack
-
-| Layer | Technology |
-|---|---|
-| Framework | Next.js 15 App Router |
-| UI Library | React 19 |
-| Language | TypeScript 5 |
-| Styling | Tailwind CSS 3 |
-| Icons | Material Symbols Outlined |
-| Runtime | Node.js |
-| Data | Static arrays, component state, and localStorage demo data |
-
----
+- View student safety and school updates.
+- Check child-related status screens.
+- Receive a calmer, simpler experience than admin dashboards.
 
 ## Project Structure
 
 ```text
 frontend/
-|-- app/
-|   |-- page.tsx
-|   |-- login/
-|   |-- main-admin/
-|   |   |-- login/
-|   |   |-- dashboard/
-|   |   `-- reports/
-|   |-- school-registration/
-|   |-- admin/
-|   |-- teacher/
-|   `-- parent/
-|-- components/
-|   |-- AdminSidebar.tsx
-|   |-- AdminTopNav.tsx
-|   |-- MainAdminShell.tsx
-|   |-- ParentSidebar.tsx
-|   |-- TeacherSidebar.tsx
-|   `-- LogoutConfirmButton.tsx
-|-- lib/
-|   `-- downloadFile.ts
-|-- scripts/
-|   `-- run-next.cjs
-|-- tailwind.config.ts
-|-- next.config.ts
-|-- tsconfig.json
-|-- package.json
-`-- README.md
+  app/
+    admin/
+    login/
+    main-admin/
+    parent/
+    teacher/
+    school-registration/
+  components/
+  public/
+  scripts/
+  package.json
+  tailwind.config.*
 ```
 
----
+## Console Notes
 
-## Design System
+These browser console messages are usually not SafeReach application errors:
 
-### Brand Tokens
+- `contentscript.js MaxListenersExceededWarning`: caused by a browser extension content script.
+- `Download the React DevTools`: normal React development message.
+- `React Router Future Flag Warning`: a development warning from React Router; upgrade flags can be enabled when the app is ready for v7 behavior.
+- `MetaMask extension not found`: caused by an injected wallet script or extension, not this app unless wallet features were intentionally added.
 
-| Token | Hex | Usage |
-|---|---|---|
-| `primary` | `#00236f` | Main brand, headings, buttons |
-| `secondary` | `#006b5f` | Success states and secondary actions |
-| `tertiary` | `#4b1c00` | Accent surfaces |
-| `error` | `#ba1a1a` | Alerts, critical states, delete actions |
-| `background` | `#f8f9fb` | App background |
-| `surface` | `#f8f9fb` | Cards and panels |
+To confirm an actual app error, test in an incognito window with extensions disabled, then reload the local app.
 
-### UI Behavior
+## Deployment Notes
 
-| Pattern | Status |
-|---|---|
-| Fixed top headers | Added for admin, parent, and teacher shells |
-| Mobile side navigation | Three-line menu opens and closes the side menu |
-| Horizontal table scroll | Added where tables can exceed viewport width |
-| Logout confirmation | Logout asks for confirmation before returning to role selection |
-| Download/export | Frontend CSV/text download helpers |
-| Backend connections | Not created |
+For Vercel:
 
----
+```text
+Framework Preset: Next.js
+Root Directory: frontend
+Install Command: npm install
+Build Command: npm run build
+Output Directory: .next
+```
 
-## Available Scripts
+For environment variables, add only real runtime values needed by the frontend. Do not commit secrets to this repository.
 
-| Script | Description |
-|---|---|
-| `npm run dev` | Start development server |
-| `npm run build` | Build production app |
-| `npm start` | Start production server |
-| `npm run lint` | Run lint command through the Next helper |
+## Quality Checklist
 
----
-
-## Important Notes
-
-> This is a prototype. Do not treat the demo login values or local frontend state as production authentication or production data storage.
-
-- Authentication is simulated.
-- Main-admin approval and SMS behavior is frontend preview only.
-- School requests are stored locally in browser localStorage for the demo.
-- No backend folder, backend API, database, Docker backend, or Kubernetes manifests are created by this frontend.
-- Future backend work should replace duplicate static arrays with real school, class, section, student, staff, permission, and audit APIs.
+- Run `npm run build` before deployment.
+- Check desktop and mobile widths.
+- Verify hover states, focus states, and active navigation.
+- Keep urgent animations meaningful and limited.
+- Disable browser extensions when debugging unrelated console noise.
 
 ---
 
 <div align="center">
-
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:00236F,50:006B5F,100:7C3AED&height=110&section=footer&text=SafeReach%20Frontend&fontColor=FFFFFF&fontSize=26&animation=fadeIn" alt="SafeReach animated footer" />
-
+  <strong>SafeReach</strong><br />
+  Calm dashboards for safer school operations.
 </div>
