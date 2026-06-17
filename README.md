@@ -52,8 +52,8 @@ The current codebase contains the SafeReach frontend plus an initial Flask/Socke
 
 ```powershell
 cd E:\Projects\Live\SafeReach\frontend
-npm install
-npm run dev
+yarn runtime:install
+yarn runtime:dev
 ```
 
 Open:
@@ -66,9 +66,11 @@ Production build:
 
 ```powershell
 cd E:\Projects\Live\SafeReach\frontend
-npm run build
-npm start
+yarn runtime:build
+yarn runtime:start
 ```
+
+The frontend uses a Windows-friendly Yarn runtime helper. Dependencies are installed in `%TEMP%\safereach_frontend_install`, then the project source is synced there before running Next.js. This avoids the very slow npm/node_modules extraction issue seen inside the project folder.
 
 ## Project Structure
 
@@ -453,7 +455,7 @@ Example:
 - Do not commit secrets.
 - Do not create backend code inside `frontend/`.
 - Keep frontend demo data clearly separated from future backend APIs.
-- Run `npm run build` before deployment.
+- Run `yarn runtime:build` before deployment.
 - Use incognito mode with extensions disabled when debugging browser-extension console messages.
 
 ## Deployment Plan
@@ -464,7 +466,7 @@ Frontend:
 Platform: Vercel or GitHub Pages static export workflow
 Root Directory: frontend
 Install Command: npm ci
-Build Command: npm run build
+Build Command: yarn runtime:build
 Environment: NEXT_PUBLIC_SAFEREACH_API_URL
 ```
 

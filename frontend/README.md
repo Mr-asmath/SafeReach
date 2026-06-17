@@ -45,10 +45,12 @@ SafeReach is currently a frontend application. It is designed as a high-fidelity
 
 ## Quick Start
 
+Recommended Windows runtime method for this project:
+
 ```powershell
 cd E:\Projects\Live\SafeReach\frontend
-npm install
-npm run dev
+yarn runtime:install
+yarn runtime:dev
 ```
 
 Open the app:
@@ -60,19 +62,21 @@ http://localhost:3000
 Build for production:
 
 ```powershell
-npm run build
-npm run start
+yarn runtime:build
+yarn runtime:start
 ```
+
+The runtime commands install dependencies in `%TEMP%\safereach_frontend_install` and sync only the frontend source files there before running Next.js. This avoids very slow Windows dependency extraction inside the project folder.
 
 ## Scripts
 
 | Command | Purpose |
 | --- | --- |
-| `npm run dev` | Start the local Next.js development server |
-| `npm run build` | Create the production build |
-| `npm run start` | Run the production server after build |
-| `npm run lint` | Run Next.js linting |
-| `npm run build:pages` | Build page output through the project helper script |
+| `yarn runtime:install` | Install frontend dependencies into the fast runtime folder |
+| `yarn runtime:dev` | Start the local Next.js development server on port 3000 |
+| `yarn runtime:build` | Create the production build |
+| `yarn runtime:start` | Run the production server after build |
+| `yarn build:pages` | Build page output through the project helper script |
 
 ## Visual Style
 
@@ -227,8 +231,8 @@ For Vercel:
 ```text
 Framework Preset: Next.js
 Root Directory: frontend
-Install Command: npm install
-Build Command: npm run build
+Install Command: yarn runtime:install
+Build Command: yarn runtime:build
 Output Directory: .next
 ```
 
@@ -236,7 +240,7 @@ For environment variables, add only real runtime values needed by the frontend. 
 
 ## Quality Checklist
 
-- Run `npm run build` before deployment.
+- Run `yarn runtime:build` before deployment.
 - Check desktop and mobile widths.
 - Verify hover states, focus states, and active navigation.
 - Keep urgent animations meaningful and limited.

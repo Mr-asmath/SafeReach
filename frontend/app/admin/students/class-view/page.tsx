@@ -30,9 +30,9 @@ const statusStyle: Record<string, string> = {
 
 function ClassViewContent() {
   const params = useSearchParams();
-  const className = params.get('class') || 'Class 4';
-  const section = params.get('section') || 'B';
-  const initialView = (params.get('view') as Panel | null) || 'overview';
+  const className = params?.get('class') || 'Class 4';
+  const section = params?.get('section') || 'B';
+  const initialView = (params?.get('view') as Panel | null) || 'overview';
   const [panel, setPanel] = useState<Panel>(initialView);
   const [search, setSearch] = useState('');
   const [teachers, setTeachers] = useState(teacherSeed);

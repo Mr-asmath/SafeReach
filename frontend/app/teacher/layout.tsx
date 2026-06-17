@@ -31,7 +31,7 @@ const titleMap: Record<string, { title: string; sub: string }> = {
 };
 
 export default function TeacherLayout({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
+  const pathname = usePathname() ?? '';
   const [menuOpen, setMenuOpen] = useState(false);
   const activeItem: ActiveItem = itemMap[pathname] ?? 'dashboard';
   const { title, sub } = titleMap[pathname] ?? { title: 'Teacher Portal', sub: '' };

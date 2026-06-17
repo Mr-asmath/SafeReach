@@ -69,9 +69,9 @@ const groupTabs: { id: MessageGroup; label: string; icon: string; helper: string
 
 function AdminMessagesContent() {
   const searchParams = useSearchParams();
-  const requestedChat = searchParams.get('chat');
-  const requestedName = searchParams.get('name');
-  const requestedRole = searchParams.get('role');
+  const requestedChat = searchParams?.get('chat');
+  const requestedName = searchParams?.get('name');
+  const requestedRole = searchParams?.get('role');
   const dynamicConversation = useMemo<Conversation | undefined>(() => {
     if (!requestedChat?.startsWith('teacher-') || !requestedName || conversations.some(conversation => conversation.id === requestedChat)) return undefined;
     const initials = requestedName.split(' ').slice(0, 2).map(part => part[0]).join('').toUpperCase();

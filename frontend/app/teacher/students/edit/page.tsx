@@ -92,7 +92,7 @@ function buildStudent(form: StudentFormState, existing: TeacherStudent): Teacher
 function TeacherStudentEditContent() {
   const router = useRouter();
   const params = useSearchParams();
-  const studentId = params.get('id') ?? '';
+  const studentId = params?.get('id') ?? '';
   const [students, setStudents] = useState<TeacherStudent[]>(teacherStudentSeed);
   const [formState, setFormState] = useState<StudentFormState>(emptyForm);
   const [notice, setNotice] = useState('');

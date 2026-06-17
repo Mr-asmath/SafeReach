@@ -1,0 +1,8 @@
+yarn run v1.22.22
+$ node node_modules/next/dist/bin/next start
+   ▲ Next.js 15.5.19
+   - Local:        http://localhost:3000
+   - Network:      http://10.198.227.131:3000
+
+ ✓ Starting...
+ ✓ Ready in 30.7s

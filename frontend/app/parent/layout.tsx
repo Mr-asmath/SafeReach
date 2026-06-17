@@ -32,7 +32,7 @@ const titleMap: Record<string, { title: string; sub: string }> = {
 };
 
 export default function ParentLayout({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
+  const pathname = usePathname() ?? '';
   const [menuOpen, setMenuOpen] = useState(false);
   const activeItem: ActiveItem = itemMap[pathname] ?? 'dashboard';
   const { title, sub } = titleMap[pathname] ?? { title: 'Parent Portal', sub: '' };
