@@ -9,7 +9,7 @@
 
   <p>
     <img alt="Next.js" src="https://img.shields.io/badge/Next.js-15-111111?style=for-the-badge&logo=nextdotjs&logoColor=white" />
-    <img alt="React" src="https://img.shields.io/badge/React-19-149ECA?style=for-the-badge&logo=react&logoColor=white" />
+    <img alt="React" src="https://img.shields.io/badge/React-18.3-149ECA?style=for-the-badge&logo=react&logoColor=white" />
     <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript&logoColor=white" />
     <img alt="Tailwind" src="https://img.shields.io/badge/Tailwind-CSS-38BDF8?style=for-the-badge&logo=tailwindcss&logoColor=white" />
     <img alt="Backend" src="https://img.shields.io/badge/Backend-Flask%20%2B%20PostgreSQL%20%2B%20MongoDB-00A77F?style=for-the-badge" />
@@ -70,7 +70,9 @@ yarn runtime:build
 yarn runtime:start
 ```
 
-The frontend uses a Windows-friendly Yarn runtime helper. Dependencies are installed in `%TEMP%\safereach_frontend_install`, then the project source is synced there before running Next.js. This avoids the very slow npm/node_modules extraction issue seen inside the project folder.
+The frontend uses a Windows-friendly Yarn runtime helper. Dependencies are installed in `C:\SafeReachRuntime\frontend`, then the project source is synced there before running Next.js. This avoids the very slow npm/node_modules extraction issue seen inside the project folder and keeps Next.js away from parent user-profile package files.
+
+`yarn runtime:start` and `yarn runtime:dev` automatically stop the existing process on port `3000` before starting SafeReach.
 
 ## Project Structure
 

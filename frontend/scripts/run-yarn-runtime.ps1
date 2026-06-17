@@ -6,8 +6,14 @@ param(
 $ErrorActionPreference = "Stop"
 
 $ProjectRoot = Split-Path -Parent $PSScriptRoot
-$RuntimeRoot = Join-Path $env:TEMP "safereach_frontend_install"
+$RuntimeRoot = "C:\SafeReachRuntime\frontend"
 $NextBin = Join-Path $RuntimeRoot "node_modules\next\dist\bin\next"
+$Node20Path = Join-Path $env:NVM_HOME "v20.19.0"
+$Port = 3000
+
+if ($env:NVM_HOME -and (Test-Path (Join-Path $Node20Path "node.exe"))) {
+  $env:Path = "$Node20Path;$env:Path"
+}
 
 function Copy-ProjectFiles {
   New-Item -ItemType Directory -Path $RuntimeRoot -Force | Out-Null
@@ -18,7 +24,8 @@ function Copy-ProjectFiles {
     "postcss.config.mjs",
     "tailwind.config.ts",
     "tsconfig.json",
-    "next-env.d.ts"
+    "next-env.d.ts",
+    "yarn.lock"
   )) {
     $source = Join-Path $ProjectRoot $file
     if (Test-Path $source) {
@@ -36,6 +43,30 @@ function Copy-ProjectFiles {
       }
     } elseif (Test-Path $destination) {
       Remove-Item -LiteralPath $destination -Recurse -Force
+    }
+  }
+}
+
+function Stop-PortProcess {
+  param([int]$TargetPort)
+
+  if ($env:OS -ne "Windows_NT") {
+    return
+  }
+
+  $netstatOutput = netstat -ano | Select-String -Pattern "LISTENING" | Select-String -Pattern ":$TargetPort\s"
+  $processIds = @()
+
+  foreach ($line in $netstatOutput) {
+    if ($line.Line -match "^\s*TCP\s+\S+:$TargetPort\s+\S+\s+LISTENING\s+(\d+)\s*$") {
+      $processIds += [int]$Matches[1]
+    }
+  }
+
+  $processIds | Sort-Object -Unique | ForEach-Object {
+    if ($_ -ne $PID) {
+      Write-Host "Stopping existing process on port $TargetPort (PID $_)..."
+      Stop-Process -Id $_ -Force -ErrorAction SilentlyContinue
     }
   }
 }
@@ -68,9 +99,11 @@ try {
     if (-not (Test-Path (Join-Path $RuntimeRoot ".next\BUILD_ID"))) {
       node $NextBin build
     }
-    node $NextBin start -p 3000
+    Stop-PortProcess -TargetPort $Port
+    node $NextBin start -p $Port
   } elseif ($Mode -eq "dev") {
-    node $NextBin dev -p 3000
+    Stop-PortProcess -TargetPort $Port
+    node $NextBin dev -p $Port
   }
 } finally {
   Pop-Location

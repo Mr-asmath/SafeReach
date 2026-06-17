@@ -1,0 +1,7 @@
+Stopping existing process on port 3000 (PID 12632)...
+   ▲ Next.js 15.5.18
+   - Local:        http://localhost:3000
+   - Network:      http://10.198.227.131:3000
+
+ ✓ Starting...
+ ✓ Ready in 26s

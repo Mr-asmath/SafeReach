@@ -1,6 +1,6 @@
 {
   "framework": "nextjs",
-  "buildCommand": "npm run build",
-  "installCommand": "npm ci",
+  "buildCommand": "yarn build",
+  "installCommand": "yarn install --frozen-lockfile --network-timeout 600000 --ignore-engines",
   "outputDirectory": ".next"
 }

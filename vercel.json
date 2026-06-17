@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "buildCommand": "cd frontend && npm ci && npm run build",
+  "buildCommand": "cd frontend && yarn install --frozen-lockfile --network-timeout 600000 --ignore-engines && yarn build",
   "outputDirectory": "frontend/.next",
-  "installCommand": "cd frontend && npm ci",
+  "installCommand": "cd frontend && yarn install --frozen-lockfile --network-timeout 600000 --ignore-engines",
   "framework": "nextjs"
 }

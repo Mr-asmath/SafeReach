@@ -9,7 +9,7 @@
 
   <p>
     <img alt="Next.js" src="https://img.shields.io/badge/Next.js-15-111111?style=for-the-badge&logo=nextdotjs&logoColor=white" />
-    <img alt="React" src="https://img.shields.io/badge/React-19-149ECA?style=for-the-badge&logo=react&logoColor=white" />
+    <img alt="React" src="https://img.shields.io/badge/React-18.3-149ECA?style=for-the-badge&logo=react&logoColor=white" />
     <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript&logoColor=white" />
     <img alt="Tailwind" src="https://img.shields.io/badge/Tailwind-CSS-38BDF8?style=for-the-badge&logo=tailwindcss&logoColor=white" />
   </p>
@@ -66,7 +66,9 @@ yarn runtime:build
 yarn runtime:start
 ```
 
-The runtime commands install dependencies in `%TEMP%\safereach_frontend_install` and sync only the frontend source files there before running Next.js. This avoids very slow Windows dependency extraction inside the project folder.
+The runtime commands install dependencies in `C:\SafeReachRuntime\frontend` and sync only the frontend source files there before running Next.js. This avoids very slow Windows dependency extraction inside the project folder and prevents parent user-profile package files from affecting Next.js module resolution.
+
+`yarn runtime:start` and `yarn runtime:dev` automatically stop the existing process on port `3000` before starting SafeReach, so repeated starts do not fail with `EADDRINUSE`.
 
 ## Scripts
 

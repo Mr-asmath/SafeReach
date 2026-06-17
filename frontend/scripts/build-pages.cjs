@@ -1,12 +1,12 @@
 const { spawnSync } = require("node:child_process");
 const fs = require("node:fs");
 const path = require("node:path");
-const os = require("node:os");
 
 const projectDir = path.resolve(__dirname, "..");
-const runtimeDir = path.join(os.tmpdir(), "safereach-runtime-prod");
-const runtimeOut = path.join(runtimeDir, "out");
 const projectOut = path.join(projectDir, "out");
+const projectNextBin = path.join(projectDir, "node_modules", "next", "dist", "bin", "next");
+const runtimeDir = "C:\\SafeReachRuntime\\frontend";
+const runtimeOut = path.join(runtimeDir, "out");
 
 function run(command, args, options = {}) {
   const result = spawnSync(command, args, {
@@ -16,7 +16,7 @@ function run(command, args, options = {}) {
       GITHUB_PAGES: "true",
     },
     stdio: "inherit",
-    shell: false,
+    shell: process.platform === "win32",
     ...options,
   });
 
@@ -36,12 +36,28 @@ function copyDirectory(source, target) {
   fs.cpSync(source, target, { recursive: true });
 }
 
-run(process.execPath, [path.join(projectDir, "scripts", "run-next.cjs"), "build"]);
+if (process.platform === "win32" && !fs.existsSync(projectNextBin)) {
+  run("powershell", [
+    "-ExecutionPolicy",
+    "Bypass",
+    "-File",
+    path.join(projectDir, "scripts", "run-yarn-runtime.ps1"),
+    "build",
+  ]);
 
-if (!fs.existsSync(runtimeOut)) {
-  console.error(`GitHub Pages export folder was not created: ${runtimeOut}`);
+  if (!fs.existsSync(runtimeOut)) {
+    console.error(`GitHub Pages export folder was not created: ${runtimeOut}`);
+    process.exit(1);
+  }
+
+  copyDirectory(runtimeOut, projectOut);
+} else {
+  run(process.platform === "win32" ? "yarn.cmd" : "yarn", ["build"]);
+}
+
+if (!fs.existsSync(projectOut)) {
+  console.error(`GitHub Pages export folder was not created: ${projectOut}`);
   process.exit(1);
 }
 
-copyDirectory(runtimeOut, projectOut);
-console.log(`GitHub Pages static export copied to ${projectOut}`);
+console.log(`GitHub Pages static export created at ${projectOut}`);
