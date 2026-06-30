@@ -1,8 +1,8 @@
 'use client';
 
 import { Fragment, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
+import { useRouter } from '@/src/next-navigation';
+import Link from '@/src/next-link';
 
 export default function AddStudentPage() {
   const [currentStep, setCurrentStep] = useState(1);

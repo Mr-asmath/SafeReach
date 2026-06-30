@@ -1,6 +1,6 @@
-'use client';
+﻿'use client';
 
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/src/next-navigation';
 import { useState } from 'react';
 
 interface LogoutConfirmButtonProps {
@@ -40,3 +40,4 @@ export default function LogoutConfirmButton({ className, label = 'Logout' }: Log
     </>
   );
 }
+

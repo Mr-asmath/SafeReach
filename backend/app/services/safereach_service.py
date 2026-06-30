@@ -27,8 +27,9 @@ def login(email: str, password: str) -> dict:
             user = cur.fetchone()
     if not user or not verify_password(password, user["password_hash"]):
         raise PermissionError("Invalid email or password")
+    safe_user = _serialize({k: v for k, v in user.items() if k != "password_hash"})
     return {
-        "user": {k: str(v) if k.endswith("_id") or k == "id" else v for k, v in user.items() if k != "password_hash"},
+        "user": safe_user,
         "accessToken": create_token(user, "access"),
         "refreshToken": create_token(user, "refresh"),
     }

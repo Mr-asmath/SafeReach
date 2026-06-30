@@ -1,6 +1,6 @@
-'use client';
+﻿'use client';
 
-import Link from 'next/link';
+import Link from '@/src/next-link';
 import { useState } from 'react';
 import LogoutConfirmButton from './LogoutConfirmButton';
 
@@ -89,3 +89,4 @@ export default function MainAdminShell({ active, title, subtitle, children }: Ma
     </div>
   );
 }
+

@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import Link from '@/src/next-link';
 import { useMemo, useState } from 'react';
 import { statusLabel, useBackendBootstrap } from '@/lib/backendData';
 

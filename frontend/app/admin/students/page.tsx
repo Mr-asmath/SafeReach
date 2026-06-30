@@ -1,6 +1,6 @@
-'use client';
+﻿'use client';
 
-import Link from 'next/link';
+import Link from '@/src/next-link';
 import { useMemo, useState } from 'react';
 import { useBackendBootstrap, statusLabel } from '@/lib/backendData';
 import { downloadTextFile } from '@/lib/downloadFile';
@@ -143,3 +143,4 @@ export default function AdminStudentsPage() {
     </div>
   );
 }
+

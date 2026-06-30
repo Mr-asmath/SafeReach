@@ -1,6 +1,6 @@
-'use client';
+﻿'use client';
 
-import Link from 'next/link';
+import Link from '@/src/next-link';
 import LogoutConfirmButton from './LogoutConfirmButton';
 
 type ActiveItem = 'dashboard' | 'students' | 'attendance' | 'messages' | 'reports' | 'timetable';
@@ -68,3 +68,4 @@ export default function TeacherSidebar({ activeItem, className = 'hidden md:flex
     </aside>
   );
 }
+

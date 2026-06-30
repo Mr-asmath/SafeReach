@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import Link from '@/src/next-link';
 import { useState } from 'react';
 
 export default function StudentProfilePage() {

@@ -1,6 +1,6 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
+import { usePathname } from '@/src/next-navigation';
 import { useState } from 'react';
 import AdminTopNav from '@/components/AdminTopNav';
 import AdminSidebar from '@/components/AdminSidebar';

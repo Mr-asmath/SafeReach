@@ -48,16 +48,16 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20.19.0
-          cache: yarn
-          cache-dependency-path: frontend/yarn.lock
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
 
       - name: Install frontend dependencies
-        run: yarn install --frozen-lockfile --network-timeout 600000 --ignore-engines
+        run: npm install
 
       - name: Build frontend
-        run: yarn build
+        run: npm run build
         env:
-          NEXT_PUBLIC_SAFEREACH_API_URL: http://localhost:5000/api/v1
+          VITE_SAFEREACH_API_URL: http://localhost:5000/api/v1
 
   container-build:
     name: Docker build checks

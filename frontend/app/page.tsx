@@ -1,6 +1,6 @@
-'use client';
+﻿'use client';
 
-import Link from 'next/link';
+import Link from '@/src/next-link';
 
 const statusChips = [
   { label: 'Reached School', icon: 'school', cls: 'bg-green-500/20 text-green-100 border-green-300/40' },
@@ -270,3 +270,4 @@ export default function SafeReachLandingPage() {
     </main>
   );
 }
+

@@ -1,6 +1,6 @@
 {
-  "framework": "nextjs",
-  "buildCommand": "yarn build",
-  "installCommand": "yarn install --frozen-lockfile --network-timeout 600000 --ignore-engines",
-  "outputDirectory": ".next"
+  "framework": "vite",
+  "buildCommand": "npm run build",
+  "installCommand": "npm install",
+  "outputDirectory": "dist"
 }

@@ -1,6 +1,6 @@
 <div align="center">
 
-  <img src="https://readme-typing-svg.demolab.com?font=Inter&weight=800&size=34&duration=2600&pause=700&color=0F62FE&center=true&vCenter=true&width=850&lines=SafeReach;Smart+Student+Safety+Dashboard;Role-Based+School+Safety+Frontend;Built+with+Next.js+and+Tailwind+CSS" alt="SafeReach animated title" />
+  <img src="https://readme-typing-svg.demolab.com?font=Inter&weight=800&size=34&duration=2600&pause=700&color=0F62FE&center=true&vCenter=true&width=850&lines=SafeReach;Smart+Student+Safety+Dashboard;Role-Based+School+Safety+Frontend;Built+with+React+Vite+and+Tailwind+CSS" alt="SafeReach animated title" />
 
   <p>
     <strong>SafeReach</strong> is a responsive school safety frontend for main admins, school admins, teachers, and parents.
@@ -8,9 +8,8 @@
   </p>
 
   <p>
-    <img alt="Next.js" src="https://img.shields.io/badge/Next.js-15-111111?style=for-the-badge&logo=nextdotjs&logoColor=white" />
+    <img alt="Vite" src="https://img.shields.io/badge/Vite-6-646CFF?style=for-the-badge&logo=vite&logoColor=white" />
     <img alt="React" src="https://img.shields.io/badge/React-18.3-149ECA?style=for-the-badge&logo=react&logoColor=white" />
-    <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript&logoColor=white" />
     <img alt="Tailwind" src="https://img.shields.io/badge/Tailwind-CSS-38BDF8?style=for-the-badge&logo=tailwindcss&logoColor=white" />
   </p>
 
@@ -36,8 +35,8 @@ SafeReach is currently a frontend application. It is designed as a high-fidelity
 
 | Area | Details |
 | --- | --- |
-| Framework | Next.js App Router |
-| UI | React, TypeScript, Tailwind CSS |
+| Framework | React + Vite SPA |
+| UI | React, Tailwind CSS |
 | Roles | Main Admin, School Admin, Teacher, Parent |
 | Data | Demo/static frontend state |
 | Backend | Not connected in this frontend folder |
@@ -45,12 +44,10 @@ SafeReach is currently a frontend application. It is designed as a high-fidelity
 
 ## Quick Start
 
-Recommended Windows runtime method for this project:
-
 ```powershell
 cd E:\Projects\Live\SafeReach\frontend
-yarn runtime:install
-yarn runtime:dev
+npm install
+npm run dev
 ```
 
 Open the app:
@@ -62,23 +59,20 @@ http://localhost:3000
 Build for production:
 
 ```powershell
-yarn runtime:build
-yarn runtime:start
+npm run build
+npm start
 ```
 
-The runtime commands install dependencies in `C:\SafeReachRuntime\frontend` and sync only the frontend source files there before running Next.js. This avoids very slow Windows dependency extraction inside the project folder and prevents parent user-profile package files from affecting Next.js module resolution.
-
-`yarn runtime:start` and `yarn runtime:dev` automatically stop the existing process on port `3000` before starting SafeReach, so repeated starts do not fail with `EADDRINUSE`.
+The frontend is now a normal React/Vite single-page app. Vite serves the same role pages through a lightweight browser router and local navigation helpers.
 
 ## Scripts
 
 | Command | Purpose |
 | --- | --- |
-| `yarn runtime:install` | Install frontend dependencies into the fast runtime folder |
-| `yarn runtime:dev` | Start the local Next.js development server on port 3000 |
-| `yarn runtime:build` | Create the production build |
-| `yarn runtime:start` | Run the production server after build |
-| `yarn build:pages` | Build page output through the project helper script |
+| `npm install` | Install frontend dependencies |
+| `npm run dev` | Start the Vite development server on port 3000 |
+| `npm run build` | Create the production `dist/` build |
+| `npm start` | Preview the production build locally |
 
 ## Visual Style
 
@@ -231,18 +225,18 @@ To confirm an actual app error, test in an incognito window with extensions disa
 For Vercel:
 
 ```text
-Framework Preset: Next.js
+Framework Preset: Vite
 Root Directory: frontend
-Install Command: yarn runtime:install
-Build Command: yarn runtime:build
-Output Directory: .next
+Install Command: npm install
+Build Command: npm run build
+Output Directory: dist
 ```
 
 For environment variables, add only real runtime values needed by the frontend. Do not commit secrets to this repository.
 
 ## Quality Checklist
 
-- Run `yarn runtime:build` before deployment.
+- Run `npm run build` before deployment.
 - Check desktop and mobile widths.
 - Verify hover states, focus states, and active navigation.
 - Keep urgent animations meaningful and limited.

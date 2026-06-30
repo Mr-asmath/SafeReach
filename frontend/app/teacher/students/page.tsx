@@ -1,6 +1,6 @@
-'use client';
+﻿'use client';
 
-import Link from 'next/link';
+import Link from '@/src/next-link';
 import { useEffect, useMemo, useState } from 'react';
 import { downloadTextFile } from '@/lib/downloadFile';
 
@@ -342,3 +342,4 @@ export default function TeacherStudentsPage() {
     </div>
   );
 }
+

@@ -8,9 +8,8 @@
   </p>
 
   <p>
-    <img alt="Next.js" src="https://img.shields.io/badge/Next.js-15-111111?style=for-the-badge&logo=nextdotjs&logoColor=white" />
+    <img alt="Vite" src="https://img.shields.io/badge/Vite-6-646CFF?style=for-the-badge&logo=vite&logoColor=white" />
     <img alt="React" src="https://img.shields.io/badge/React-18.3-149ECA?style=for-the-badge&logo=react&logoColor=white" />
-    <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript&logoColor=white" />
     <img alt="Tailwind" src="https://img.shields.io/badge/Tailwind-CSS-38BDF8?style=for-the-badge&logo=tailwindcss&logoColor=white" />
     <img alt="Backend" src="https://img.shields.io/badge/Backend-Flask%20%2B%20PostgreSQL%20%2B%20MongoDB-00A77F?style=for-the-badge" />
   </p>
@@ -52,8 +51,8 @@ The current codebase contains the SafeReach frontend plus an initial Flask/Socke
 
 ```powershell
 cd E:\Projects\Live\SafeReach\frontend
-yarn runtime:install
-yarn runtime:dev
+npm install
+npm run dev
 ```
 
 Open:
@@ -66,13 +65,11 @@ Production build:
 
 ```powershell
 cd E:\Projects\Live\SafeReach\frontend
-yarn runtime:build
-yarn runtime:start
+npm run build
+npm start
 ```
 
-The frontend uses a Windows-friendly Yarn runtime helper. Dependencies are installed in `C:\SafeReachRuntime\frontend`, then the project source is synced there before running Next.js. This avoids the very slow npm/node_modules extraction issue seen inside the project folder and keeps Next.js away from parent user-profile package files.
-
-`yarn runtime:start` and `yarn runtime:dev` automatically stop the existing process on port `3000` before starting SafeReach.
+The frontend is now a React/Vite single-page app. Vite builds static files into `frontend/dist`, and Docker/Kubernetes serve those files through Nginx.
 
 ## Project Structure
 
@@ -100,8 +97,8 @@ SafeReach/
 
 | Area | Details |
 | --- | --- |
-| Framework | Next.js App Router |
-| UI | React, TypeScript, Tailwind CSS |
+| Framework | React + Vite SPA |
+| UI | React, Tailwind CSS |
 | State | Frontend demo state with localStorage |
 | Routing | Role-based pages for admin, teacher, parent, and main admin |
 | Landing | Animated SafeReach hero, travel map, role previews, and backend-ready section |
@@ -457,7 +454,7 @@ Example:
 - Do not commit secrets.
 - Do not create backend code inside `frontend/`.
 - Keep frontend demo data clearly separated from future backend APIs.
-- Run `yarn runtime:build` before deployment.
+- Run `npm run build` before deployment.
 - Use incognito mode with extensions disabled when debugging browser-extension console messages.
 
 ## Deployment Plan
@@ -467,9 +464,10 @@ Frontend:
 ```text
 Platform: Vercel or GitHub Pages static export workflow
 Root Directory: frontend
-Install Command: npm ci
-Build Command: yarn runtime:build
-Environment: NEXT_PUBLIC_SAFEREACH_API_URL
+Install Command: npm install
+Build Command: npm run build
+Output Directory: dist
+Environment: VITE_SAFEREACH_API_URL
 ```
 
 Backend:

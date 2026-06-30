@@ -1,6 +1,6 @@
-'use client';
+﻿'use client';
 
-import Link from 'next/link';
+import Link from '@/src/next-link';
 
 type ActivePage = 'dashboard' | 'students' | 'teachers' | 'messages' | 'reports' | 'timetable';
 
@@ -47,3 +47,4 @@ export default function AdminTopNav({ activePage, onMenuToggle }: AdminTopNavPro
     </header>
   );
 }
+

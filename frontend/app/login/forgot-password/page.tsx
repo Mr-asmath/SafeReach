@@ -1,6 +1,6 @@
-'use client';
+﻿'use client';
 
-import Link from 'next/link';
+import Link from '@/src/next-link';
 import { useEffect, useState } from 'react';
 
 export default function ForgotPasswordPage() {
@@ -56,3 +56,4 @@ export default function ForgotPasswordPage() {
     </main>
   );
 }
+

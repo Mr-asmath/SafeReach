@@ -1,8 +1,8 @@
-'use client';
+﻿'use client';
 
-import Link from 'next/link';
+import Link from '@/src/next-link';
 import { Suspense, useMemo, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams } from '@/src/next-navigation';
 
 type Panel = 'overview' | 'teachers' | 'students';
 
@@ -219,3 +219,4 @@ export default function AdminStudentClassViewPage() {
     </Suspense>
   );
 }
+

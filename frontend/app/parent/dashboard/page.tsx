@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import Link from '@/src/next-link';
 import { useEffect, useState } from 'react';
 import { readDailyIds, writeDailyIds } from '@/lib/dailyActionLocks';
 import { travelStatusClass, travelStatusIcon, travelStatusLabel, useStudentTravelState } from '@/lib/studentTravel';

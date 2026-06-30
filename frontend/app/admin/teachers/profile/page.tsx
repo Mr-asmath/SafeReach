@@ -1,12 +1,12 @@
-'use client';
+﻿'use client';
 
-import Link from 'next/link';
+import Link from '@/src/next-link';
 import { useState } from 'react';
 
 const classes = [
-  {name:'Mathematics – Grade 10A',students:34,room:'Room 201',time:'Mon/Wed/Fri 08:00–09:00',attendance:'94%'},
-  {name:'Mathematics – Grade 10B',students:32,room:'Room 202',time:'Tue/Thu 09:00–10:30',attendance:'91%'},
-  {name:'Mathematics – Grade 9A',students:36,room:'Room 201',time:'Mon/Wed 11:00–12:00',attendance:'88%'},
+  {name:'Mathematics â€“ Grade 10A',students:34,room:'Room 201',time:'Mon/Wed/Fri 08:00â€“09:00',attendance:'94%'},
+  {name:'Mathematics â€“ Grade 10B',students:32,room:'Room 202',time:'Tue/Thu 09:00â€“10:30',attendance:'91%'},
+  {name:'Mathematics â€“ Grade 9A',students:36,room:'Room 201',time:'Mon/Wed 11:00â€“12:00',attendance:'88%'},
 ];
 const activities = [
   {icon:'how_to_reg',text:'Marked attendance for Grade 10A',time:'2 hours ago',color:'text-green-600'},
@@ -194,3 +194,4 @@ export default function AdminTeacherProfilePage() {
     </div>
   );
 }
+

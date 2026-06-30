@@ -15,7 +15,7 @@ class SafeReachRealtimeClient {
   private handlers = new Set<Handler>();
   private offlineEvents: SafeReachRealtimeEvent[] = [];
 
-  connect(url = process.env.NEXT_PUBLIC_SAFEREACH_WS_URL ?? DEFAULT_SOCKET_URL) {
+  connect(url = import.meta.env.VITE_SAFEREACH_WS_URL ?? DEFAULT_SOCKET_URL) {
     if (typeof window === 'undefined' || this.socket?.readyState === WebSocket.OPEN) return;
     try {
       this.socket = new WebSocket(url);

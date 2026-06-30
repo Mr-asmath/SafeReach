@@ -1,6 +1,6 @@
-'use client';
+﻿'use client';
 
-import Link from 'next/link';
+import Link from '@/src/next-link';
 import LogoutConfirmButton from './LogoutConfirmButton';
 import { downloadTextFile } from '@/lib/downloadFile';
 
@@ -138,3 +138,4 @@ export default function AdminSidebar({ activeItem, variant = 'analytics', classN
     </aside>
   );
 }
+

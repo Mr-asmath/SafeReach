@@ -1,7 +1,7 @@
-'use client';
+﻿'use client';
 
 import { Suspense, useEffect, useMemo, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams } from '@/src/next-navigation';
 
 type MessageGroup = 'common' | 'teacher' | 'parent';
 
@@ -226,3 +226,4 @@ export default function AdminMessagesPage() {
     </Suspense>
   );
 }
+

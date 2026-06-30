@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import Link from '@/src/next-link';
 
 const children = [
   {id:1,name:'Aarav Mehta',grade:'Grade 8 – Section A',roll:'STU-0042',teacher:'Mr. James Anderson',status:'In School',statusColor:'bg-green-100 text-green-700',location:'Science Lab – Building B',attendance:'94%',avatar:'AM',activities:[{icon:'how_to_reg',text:'Marked Present – Period 1',time:'8:05 AM',c:'text-green-600'},{icon:'science',text:'Science Lab session started',time:'10:00 AM',c:'text-blue-500'},{icon:'lunch_dining',text:'Lunch break – Cafeteria',time:'12:30 PM',c:'text-orange-500'}]},

@@ -1,8 +1,8 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
+import { useRouter } from '@/src/next-navigation';
+import Link from '@/src/next-link';
 
 export default function AdminLoginPage() {
   const [step, setStep] = useState<1 | 2>(1);
@@ -78,7 +78,7 @@ export default function AdminLoginPage() {
                 </div>
                 <div className="relative">
                   <span className="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline text-[20px]">lock</span>
-                  <input id="password" required type={showPwd ? 'text' : 'password'} defaultValue="Admin@2025" className="w-full pl-11 pr-12 py-3 bg-surface-container border border-outline-variant rounded-xl focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all text-body-md" placeholder="••••••••" />
+                  <input id="password" required type={showPwd ? 'text' : 'password'} defaultValue="Admin@2025" className="w-full pl-11 pr-12 py-3 bg-surface-container border border-outline-variant rounded-xl focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all text-body-md" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" />
                   <button type="button" onClick={() => setShowPwd(!showPwd)} className="absolute right-3.5 top-1/2 -translate-y-1/2 text-outline hover:text-primary transition-colors">
                     <span className="material-symbols-outlined text-[20px]">{showPwd ? 'visibility_off' : 'visibility'}</span>
                   </button>
@@ -151,3 +151,4 @@ export default function AdminLoginPage() {
     </main>
   );
 }
+

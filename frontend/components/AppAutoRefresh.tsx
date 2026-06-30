@@ -1,7 +1,7 @@
-'use client';
+﻿'use client';
 
 import { useEffect, useRef } from 'react';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from '@/src/next-navigation';
 
 const ACTION_REFRESH_DELAY = 180;
 const ROUTE_REFRESH_DELAY = 80;
@@ -53,3 +53,4 @@ export default function AppAutoRefresh() {
 
   return null;
 }
+

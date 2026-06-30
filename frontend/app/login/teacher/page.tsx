@@ -1,7 +1,7 @@
-'use client';
+﻿'use client';
 
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
+import { useRouter } from '@/src/next-navigation';
+import Link from '@/src/next-link';
 import { useState } from 'react';
 
 export default function TeacherLoginPage() {
@@ -93,9 +93,10 @@ export default function TeacherLoginPage() {
 
         <p className="mt-6 text-center text-label-sm text-on-surface-variant flex items-center justify-center gap-1">
           <span className="material-symbols-outlined text-[14px]">lock</span>
-          Secure · Encrypted · FERPA Compliant
+          Secure Â· Encrypted Â· FERPA Compliant
         </p>
       </div>
     </main>
   );
 }
+

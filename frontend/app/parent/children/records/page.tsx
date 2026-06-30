@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import Link from '@/src/next-link';
 
 const records = [
   { child: 'Aarav Mehta', standard: 'Grade 8 - Section A', roll: 'STU-0042', attendance: '94%', lastReport: 'Term 2 Progress Report', safety: 'No open alerts' },

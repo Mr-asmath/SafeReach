@@ -18,7 +18,7 @@ spec:
           image: ghcr.io/your-org/safereach-frontend:latest
           imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 3000
+            - containerPort: 80
           envFrom:
             - configMapRef:
                 name: safereach-config
@@ -33,7 +33,7 @@ spec:
     app: safereach-frontend
   ports:
     - port: 80
-      targetPort: 3000
+      targetPort: 80
 ---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler

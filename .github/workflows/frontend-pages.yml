@@ -31,11 +31,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20.19.0
-          cache: yarn
-          cache-dependency-path: frontend/yarn.lock
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
 
       - name: Install frontend dependencies
-        run: yarn install --frozen-lockfile --network-timeout 600000 --ignore-engines
+        run: npm install
 
       - name: Configure GitHub Pages base path
         shell: bash
@@ -52,7 +52,7 @@ jobs:
           fi
 
       - name: Build static frontend export
-        run: yarn build:pages
+        run: npm run build
         env:
           GITHUB_PAGES: "true"
 
@@ -61,7 +61,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         shell: bash
         run: |
-          cd out
+          cd dist
           git init
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

@@ -1,6 +1,6 @@
-'use client';
+﻿'use client';
 
-import Link from 'next/link';
+import Link from '@/src/next-link';
 import { useMemo, useState } from 'react';
 import { type BackendTeacher, useBackendBootstrap } from '@/lib/backendData';
 
@@ -206,3 +206,4 @@ export default function AdminTeachersPage() {
     </div>
   );
 }
+

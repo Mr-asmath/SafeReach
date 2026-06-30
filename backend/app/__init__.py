@@ -14,7 +14,7 @@ def create_app() -> Flask:
     app = Flask(__name__)
     app.config.from_object(Config())
 
-    if app.config.get("SENTRY_DSN"):
+    if app.config.get("SENTRY_DSN") and app.config.get("SAFE_REACH_ENV") != "development":
         sentry_sdk.init(
             dsn=app.config["SENTRY_DSN"],
             integrations=[FlaskIntegration()],

@@ -1,7 +1,7 @@
-'use client';
+﻿'use client';
 
-import { usePathname } from 'next/navigation';
-import Link from 'next/link';
+import { usePathname } from '@/src/next-navigation';
+import Link from '@/src/next-link';
 import { useState } from 'react';
 import TeacherSidebar from '@/components/TeacherSidebar';
 
@@ -18,7 +18,7 @@ const itemMap: Record<string, ActiveItem> = {
 };
 
 const titleMap: Record<string, { title: string; sub: string }> = {
-  '/teacher/dashboard': { title: 'Welcome, Sarah Jenkins', sub: 'Class 4-B Supervisor · Academic Year 2024–25' },
+  '/teacher/dashboard': { title: 'Welcome, Sarah Jenkins', sub: 'Class 4-B Supervisor Â· Academic Year 2024â€“25' },
   '/teacher/students': { title: 'My Students', sub: 'Student records and live tracking status' },
   '/teacher/attendance': { title: 'Attendance', sub: 'Mark and track daily attendance' },
   '/teacher/messages': { title: 'Messages', sub: 'Communicate with parents and staff' },
@@ -80,3 +80,4 @@ export default function TeacherLayout({ children }: { children: React.ReactNode 
     </div>
   );
 }
+

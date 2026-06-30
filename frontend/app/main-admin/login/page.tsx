@@ -1,7 +1,7 @@
-'use client';
+﻿'use client';
 
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import Link from '@/src/next-link';
+import { useRouter } from '@/src/next-navigation';
 import { useState } from 'react';
 
 const MAIN_ADMIN_EMAIL = 'mainadmin@safereach.app';
@@ -117,3 +117,4 @@ export default function MainAdminLoginPage() {
     </main>
   );
 }
+

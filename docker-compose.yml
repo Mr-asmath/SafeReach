@@ -25,9 +25,9 @@ services:
     build:
       context: ./frontend
     environment:
-      NEXT_PUBLIC_SAFEREACH_API_URL: http://localhost:5000/api/v1
+      VITE_SAFEREACH_API_URL: http://localhost:5000/api/v1
     ports:
-      - "3000:3000"
+      - "3000:80"
     depends_on:
       - backend
 

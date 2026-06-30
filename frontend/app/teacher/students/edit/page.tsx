@@ -1,8 +1,8 @@
-'use client';
+﻿'use client';
 
-import Link from 'next/link';
+import Link from '@/src/next-link';
 import { Suspense, useEffect, useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from '@/src/next-navigation';
 
 type TeacherStudent = {
   name: string;
@@ -224,3 +224,4 @@ export default function TeacherStudentEditPage() {
     </Suspense>
   );
 }
+

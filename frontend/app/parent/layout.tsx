@@ -1,7 +1,7 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
-import Link from 'next/link';
+import { usePathname } from '@/src/next-navigation';
+import Link from '@/src/next-link';
 import { useState } from 'react';
 import ParentSidebar from '@/components/ParentSidebar';
 

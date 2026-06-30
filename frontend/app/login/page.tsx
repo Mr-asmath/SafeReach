@@ -1,6 +1,6 @@
-'use client';
+﻿'use client';
 
-import Link from 'next/link';
+import Link from '@/src/next-link';
 
 const roles = [
   {
@@ -106,3 +106,4 @@ export default function LoginRoleSelectorPage() {
     </main>
   );
 }
+
